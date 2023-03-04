@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestProjectSauceDemo.utilities;
 using WebDriverManager.DriverConfigs.Impl;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Edge;
@@ -57,6 +58,12 @@ namespace TestProjectSauceDemo.utilities
 
 
             }
+
+        }
+
+        public static JsonReader getDataParser()
+        {
+            return new JsonReader();
 
         }
 

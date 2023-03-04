@@ -13,18 +13,18 @@ namespace TestProjectSauceDemo.tests
     {
 
 
-        [Test]
-        public void EndToEndFlow()
+        [Test, TestCaseSource("AddTestDataConfig")]
+        public void EndToEndFlow(string username, string password, string name, string surname, string postcode)
         {
           
             LoginPage loginPage = new LoginPage(getDriver());
-            ProductsPage productPage= loginPage.validLogin("standard_user", "secret_sauce");
+            ProductsPage productPage= loginPage.validLogin(username,password);
             productPage.waitForProductPage();
             productPage.selectProducts();
             YourCardPage yourCardPage= productPage.clickShopCardLinkButton();
             CheckoutPage checkoutPage=yourCardPage.clickCheckoutButton();
             Thread.Sleep(4000);
-            checkoutPage.enterYourInformation("Galip Cagan", "Nasuhoglu", "34840");
+            checkoutPage.enterYourInformation(name, surname, postcode);
             OverviewPage overviewPage=checkoutPage.clickContinueButton();
             overviewPage.waitforOverviewPage();
             overviewPage.clickFinishButton();
@@ -33,6 +33,13 @@ namespace TestProjectSauceDemo.tests
 
         }
 
-       
+        public static IEnumerable<TestCaseData> AddTestDataConfig()
+        {
+            yield return new TestCaseData(getDataParser().extractData("username") , getDataParser().extractData("password"), getDataParser().extractData("name"), getDataParser().extractData("surname"), getDataParser().extractData("postcode"));
+            yield return new TestCaseData(getDataParser().extractData("performanceglitchuser"), getDataParser().extractData("password"), getDataParser().extractData("name"), getDataParser().extractData("surname"), getDataParser().extractData("postcode"));
+
+        }
+
+
     }
 }
