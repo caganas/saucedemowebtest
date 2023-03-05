@@ -1,1 +1,2 @@
-saucedemo.com C# Selenium testautomation project using Nunit and ExtentReport
+#saucedemowebtest
+Selenium Test Automation project for the website saucedemo.com using C# Selenium Nunit and ExtentReport frameworks. VisialStudio 2022 was used for the development.
